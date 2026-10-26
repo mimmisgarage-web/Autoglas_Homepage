@@ -86,6 +86,7 @@ h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);letter-spac
 .problem::after{inset:2px;background:#fff;z-index:-1}
 .problem svg{width:26px;height:26px;color:var(--navy-3);flex:none}
 .problem svg.rear{width:84px;height:52px}
+.problem svg.ws{width:72px;height:42px;color:var(--ink)}
 .problem:hover::before{background:var(--navy-3)}
 .problem[aria-pressed="true"]::before{background:var(--navy)}
 .problem[aria-pressed="true"]::after{inset:3px;background:#E9ECF4}
@@ -173,6 +174,7 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
   .problem{min-height:140px;font-size:17px}
   .problem svg{width:32px;height:32px}
   .problem svg.rear{width:104px;height:65px}
+  .problem svg.ws{width:90px;height:52px}
   .next{max-width:640px}
 
   .trust{grid-template-columns:repeat(3,1fr);gap:16px}
@@ -273,7 +275,12 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
       <p class="intro">Tippen Sie an, was am ehesten passt.</p>
       <div class="problems" role="group" aria-label="Schadensart wählen">
         <button class="problem" type="button" aria-pressed="false" data-label="einen Steinschlag in der Scheibe">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>
+          <!-- Frontscheiben-Umriss mit Spiegelfuß, kleiner Steinschlag rechts oben -->
+          <svg class="ws" viewBox="0 0 96 56" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+            <path d="M18 8 Q48 5 78 8 L91 44 Q48 30 5 44 Z" stroke-width="5"/>
+            <path d="M42 6.6 L44 11 H52 L54 6.6" stroke-width="3" fill="currentColor"/>
+            <g transform="translate(66 19)" stroke-width="1.6"><circle r="1.8" fill="currentColor" stroke="none"/><path d="M0 0 L-6 -2 M0 0 L-2 -6 M0 0 L4 -5 M0 0 L6 1 M0 0 L2 6 M0 0 L-4 5"/></g>
+          </svg>
           Steinschlag
         </button>
         <button class="problem" type="button" aria-pressed="false" data-label="einen Riss in der Scheibe">
