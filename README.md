@@ -23,9 +23,3 @@ Website für [glaswerk-nrw.de](https://glaswerk-nrw.de), gehostet über GitHub P
 | CNAME | www  | mimmisgarage-web.github.io |
 
 Die E-Mail-Einträge (MX, SPF, DKIM, DMARC) bleiben bei IONOS unverändert.
-
-## Bildquellen
-
-- Symbol Frontscheibe (Kachel „Steinschlag“): nachgezeichnet nach einer Vorlage von Pixabay (Pixabay-Inhaltslizenz; Quelle vom Betreiber benannt, 26.10.2026).
-- Hero-Illustration, Autoheck (Kachel „Seiten- oder Heckscheibe“), NRW-Karte: eigene Zeichnungen.
-- Logo: aus einem Foto der Visitenkarte ausgeschnitten (Vektordatei folgt).

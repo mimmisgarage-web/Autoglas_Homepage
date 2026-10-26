@@ -78,19 +78,10 @@ h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);letter-spac
 
 /* Problemwahl */
 .problems{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-/* Kacheln in Form einer Windschutzscheibe: gewölbte Ober-/Unterkante, schräge A-Säulen */
-.problems{--ws:polygon(9% 7%,20% 3.6%,35% 1.4%,50% .6%,65% 1.4%,80% 3.6%,91% 7%,100% 94%,86% 97.6%,68% 99.4%,50% 100%,32% 99.4%,14% 97.6%,0% 94%)}
-.problem{position:relative;isolation:isolate;min-height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;border:0;background:transparent;padding:18px 16%;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;line-height:1.25}
-.problem::before,.problem::after{content:"";position:absolute;clip-path:var(--ws);transition:background .15s}
-.problem::before{inset:0;background:var(--silver-3);z-index:-2}
-.problem::after{inset:2px;background:#fff;z-index:-1}
-.problem svg{width:26px;height:26px;color:var(--navy-3);flex:none}
-.problem svg.rear{width:84px;height:52px}
-.problem svg.ws{width:72px;height:42px;color:var(--ink)}
-.problem:hover::before{background:var(--navy-3)}
-.problem[aria-pressed="true"]::before{background:var(--navy)}
-.problem[aria-pressed="true"]::after{inset:3px;background:#E9ECF4}
-.problem.unsure{grid-column:1/-1;min-height:64px;flex-direction:row;padding:14px 8%;--ws:polygon(2.5% 9%,20% 3.5%,35% 1.2%,50% .5%,65% 1.2%,80% 3.5%,97.5% 9%,100% 92%,82% 97.5%,50% 100%,18% 97.5%,0% 92%)}
+.problem{min-height:96px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:8px;text-align:left;border:2px solid var(--border);background:#fff;border-radius:var(--radius);padding:14px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+.problem svg{width:26px;height:26px;color:var(--navy-3)}
+.problem[aria-pressed="true"]{border-color:var(--navy);background:#E9ECF4;box-shadow:inset 0 0 0 1px var(--navy)}
+.problem.unsure{grid-column:1/-1;min-height:60px;flex-direction:row;align-items:center;justify-content:flex-start}
 .next{margin-top:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px}
 .next p{margin:0 0 12px;color:var(--muted);font-size:15px}
 .next strong{color:var(--ink)}
@@ -130,11 +121,6 @@ h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);letter-spac
 .footer a{color:var(--navy)}
 .links{display:flex;gap:18px;margin-top:14px}
 
-/* Sprungziel kurz hervorheben (Links aus der Entscheidungsübersicht) */
-[id]{scroll-margin-top:12px}
-section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:target),.header:target,.footer:target{animation:flash 2.6s ease-out}
-@keyframes flash{0%,40%{box-shadow:inset 0 0 0 4px #F2B84B}100%{box-shadow:inset 0 0 0 4px transparent}}
-
 /* Sticky-CTA (Variante D021) */
 .sticky{position:fixed;left:50%;transform:translate(-50%,120%);bottom:0;width:min(100%,440px);padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--border);display:flex;gap:10px;z-index:20;transition:transform .25s ease}
 .sticky.show{transform:translate(-50%,0)}
@@ -143,58 +129,8 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
 
 
 
-@media (min-width:760px) and (max-width:959px){
+@media (min-width:760px){
   .page{border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 44px rgba(0,0,0,.06)}
-}
-
-.phone-text{display:none}
-
-/* PC-Ansicht: gleiche Inhalte, breiter und mehrspaltig */
-@media (min-width:960px){
-  .page{width:100%;max-width:none}
-  .header,.strip,.hero,.section,.cta,.footer{padding-left:max(48px,calc((100% - 1080px)/2));padding-right:max(48px,calc((100% - 1080px)/2))}
-  .header{padding-top:14px;padding-bottom:14px}
-  .brand img{width:64px}
-  .brand-name{font-size:24px}
-  .phone-text{display:inline;font-weight:700;color:var(--navy);text-decoration:none;margin-right:12px}
-  .header-call{display:flex;align-items:center}
-
-  .hero{padding-top:84px;padding-bottom:88px}
-  .hero h1{font-size:68px;max-width:720px}
-  .hero .lead{font-size:21px;max-width:620px;margin:20px 0 32px}
-  .hero .btn,.cta .btn{display:inline-flex;width:auto;min-width:300px;vertical-align:middle}
-  .hero .btn-call,.cta .btn-call{margin:0 0 0 12px}
-  .hint{text-align:left;font-size:15px;margin-top:18px}
-
-  .section{padding-top:64px;padding-bottom:64px}
-  .section h2,.cta h2{font-size:38px}
-  .section .intro{font-size:17px;margin-bottom:28px}
-
-  .problems{grid-template-columns:repeat(4,1fr);gap:16px}
-  .problem{min-height:140px;font-size:17px}
-  .problem svg{width:32px;height:32px}
-  .problem svg.rear{width:104px;height:65px}
-  .problem svg.ws{width:90px;height:52px}
-  .next{max-width:640px}
-
-  .trust{grid-template-columns:repeat(3,1fr);gap:16px}
-  .trust li{flex-direction:column;padding:22px}
-
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-  .steps li{padding:52px 0 0 0}
-  .steps li::after{display:none}
-
-  .area svg{width:140px}
-  .area h2{font-size:34px!important}
-
-  .cta{padding-top:64px;padding-bottom:64px}
-  .cta p{font-size:18px}
-
-  .footer{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;padding-top:40px;padding-bottom:40px}
-  .footer .f-brand{margin:0}
-
-  /* Kontakt steht am PC oben in der Kopfzeile, die Handy-Leiste entfällt */
-  .sticky{display:none}
 }
 </style>
 </head>
@@ -204,17 +140,14 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
 
 <div class="page">
 
-  <header class="header" id="kopf">
+  <header class="header">
     <a class="brand" href="#top" aria-label="Glaswerk NRW – zur Startseite">
       <img src="assets/logo.png" alt="" width="52" height="45">
       <span class="brand-name">Glaswerk NRW<span class="brand-sub">Autoglas Service</span></span>
     </a>
-    <div class="header-call">
-      <a class="phone-text" href="tel:+4916096292929">0160 / 96 292929</a>
-      <a class="icon-btn" href="tel:+4916096292929" aria-label="Anrufen: 0160 96 292929">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-      </a>
-    </div>
+    <a class="icon-btn" href="tel:+4916096292929" aria-label="Anrufen: 0160 96 292929">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    </a>
   </header>
 
   <main id="top">
@@ -275,12 +208,7 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
       <p class="intro">Tippen Sie an, was am ehesten passt.</p>
       <div class="problems" role="group" aria-label="Schadensart wählen">
         <button class="problem" type="button" aria-pressed="false" data-label="einen Steinschlag in der Scheibe">
-          <!-- Frontscheiben-Umriss mit Spiegelfuß, kleiner Steinschlag rechts oben -->
-          <svg class="ws" viewBox="0 0 96 56" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-            <path d="M18 8 Q48 5 78 8 L91 44 Q48 30 5 44 Z" stroke-width="5"/>
-            <path d="M42 6.6 L44 11 H52 L54 6.6" stroke-width="3" fill="currentColor"/>
-            <g transform="translate(66 19)" stroke-width="1.6"><circle r="1.8" fill="currentColor" stroke="none"/><path d="M0 0 L-6 -2 M0 0 L-2 -6 M0 0 L4 -5 M0 0 L6 1 M0 0 L2 6 M0 0 L-4 5"/></g>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>
           Steinschlag
         </button>
         <button class="problem" type="button" aria-pressed="false" data-label="einen Riss in der Scheibe">
@@ -292,31 +220,7 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
           Scheibe stark beschädigt oder kaputt
         </button>
         <button class="problem" type="button" aria-pressed="false" data-label="einen Schaden an einer Seiten- oder Heckscheibe">
-          <!-- Eigene Illustration: Autoheck mit Heckscheibe (keine fremden Bildrechte, D025) -->
-          <svg class="rear" viewBox="0 0 96 60" aria-hidden="true">
-            <defs>
-              <linearGradient id="gRear" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B6B93"/><stop offset="1" stop-color="#1F2744"/></linearGradient>
-              <linearGradient id="gRearShine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
-            </defs>
-            <!-- Dach und C-Säulen -->
-            <path d="M22 26 Q26 7 48 6 Q70 7 74 26 Z" fill="#C9CED6"/>
-            <!-- Heckscheibe -->
-            <path d="M26 24.5 Q29 10 48 9.4 Q67 10 70 24.5 Q48 26.2 26 24.5 Z" fill="url(#gRear)"/>
-            <path d="M28 23 Q31 11.5 46 10.6 L36 24.3 Q31 24 28 23 Z" fill="url(#gRearShine)"/>
-            <!-- Heizdrähte -->
-            <path d="M30 20.5 Q48 21.6 66 20.5 M31.5 17.4 Q48 18.4 64.5 17.4" stroke="#fff" stroke-opacity=".25" stroke-width=".6" fill="none"/>
-            <!-- Karosserie -->
-            <path d="M12 30 Q14 25 22 24.5 L74 24.5 Q82 25 84 30 L86 44 Q86 48 82 48 L14 48 Q10 48 10 44 Z" fill="#E2E5EA" stroke="#3A4670" stroke-width="1.4"/>
-            <!-- Rückleuchten -->
-            <path d="M13 31 L27 30.5 L26 35.5 L13.5 36 Z" fill="#C0392B"/>
-            <path d="M83 31 L69 30.5 L70 35.5 L82.5 36 Z" fill="#C0392B"/>
-            <!-- Kennzeichenfeld (leer) -->
-            <rect x="38" y="35" width="20" height="6" rx="1" fill="#fff" stroke="#3A4670" stroke-width=".8"/>
-            <!-- Stoßfänger und Räder -->
-            <path d="M11 44 L85 44" stroke="#3A4670" stroke-width="1.2"/>
-            <rect x="16" y="48" width="12" height="7" rx="2" fill="#1F2744"/>
-            <rect x="68" y="48" width="12" height="7" rx="2" fill="#1F2744"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16l2-6a2 2 0 0 1 2-1.4h10A2 2 0 0 1 19 10l2 6v3H3z"/><path d="M6 10.5h5v3H5.2M13 10.5h5l.8 3H13z"/></svg>
           Seiten- oder Heckscheibe
         </button>
         <button class="problem unsure" type="button" aria-pressed="false" data-label="eine andere Frage bzw. bin mir nicht sicher, was es ist">
@@ -396,7 +300,7 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
     </section>
   </main>
 
-  <footer class="footer" id="kontakt">
+  <footer class="footer">
     <div class="f-brand">
       <img src="assets/logo.png" alt="Logo Glaswerk NRW" width="64" height="55">
       <div><strong>Glaswerk NRW</strong><br>Autoglas Service · Reparatur und Austausch</div>
