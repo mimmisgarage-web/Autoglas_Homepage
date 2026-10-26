@@ -85,6 +85,7 @@ h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);letter-spac
 .problem::before{inset:0;background:var(--silver-3);z-index:-2}
 .problem::after{inset:2px;background:#fff;z-index:-1}
 .problem svg{width:26px;height:26px;color:var(--navy-3);flex:none}
+.problem svg.rear{width:84px;height:52px}
 .problem:hover::before{background:var(--navy-3)}
 .problem[aria-pressed="true"]::before{background:var(--navy)}
 .problem[aria-pressed="true"]::after{inset:3px;background:#E9ECF4}
@@ -171,6 +172,7 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
   .problems{grid-template-columns:repeat(4,1fr);gap:16px}
   .problem{min-height:140px;font-size:17px}
   .problem svg{width:32px;height:32px}
+  .problem svg.rear{width:104px;height:65px}
   .next{max-width:640px}
 
   .trust{grid-template-columns:repeat(3,1fr);gap:16px}
@@ -283,7 +285,31 @@ section:has(> h2:target),section:has(> div > div > h2:target),section:has(> h1:t
           Scheibe stark beschädigt oder kaputt
         </button>
         <button class="problem" type="button" aria-pressed="false" data-label="einen Schaden an einer Seiten- oder Heckscheibe">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16l2-6a2 2 0 0 1 2-1.4h10A2 2 0 0 1 19 10l2 6v3H3z"/><path d="M6 10.5h5v3H5.2M13 10.5h5l.8 3H13z"/></svg>
+          <!-- Eigene Illustration: Autoheck mit Heckscheibe (keine fremden Bildrechte, D025) -->
+          <svg class="rear" viewBox="0 0 96 60" aria-hidden="true">
+            <defs>
+              <linearGradient id="gRear" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B6B93"/><stop offset="1" stop-color="#1F2744"/></linearGradient>
+              <linearGradient id="gRearShine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            </defs>
+            <!-- Dach und C-Säulen -->
+            <path d="M22 26 Q26 7 48 6 Q70 7 74 26 Z" fill="#C9CED6"/>
+            <!-- Heckscheibe -->
+            <path d="M26 24.5 Q29 10 48 9.4 Q67 10 70 24.5 Q48 26.2 26 24.5 Z" fill="url(#gRear)"/>
+            <path d="M28 23 Q31 11.5 46 10.6 L36 24.3 Q31 24 28 23 Z" fill="url(#gRearShine)"/>
+            <!-- Heizdrähte -->
+            <path d="M30 20.5 Q48 21.6 66 20.5 M31.5 17.4 Q48 18.4 64.5 17.4" stroke="#fff" stroke-opacity=".25" stroke-width=".6" fill="none"/>
+            <!-- Karosserie -->
+            <path d="M12 30 Q14 25 22 24.5 L74 24.5 Q82 25 84 30 L86 44 Q86 48 82 48 L14 48 Q10 48 10 44 Z" fill="#E2E5EA" stroke="#3A4670" stroke-width="1.4"/>
+            <!-- Rückleuchten -->
+            <path d="M13 31 L27 30.5 L26 35.5 L13.5 36 Z" fill="#C0392B"/>
+            <path d="M83 31 L69 30.5 L70 35.5 L82.5 36 Z" fill="#C0392B"/>
+            <!-- Kennzeichenfeld (leer) -->
+            <rect x="38" y="35" width="20" height="6" rx="1" fill="#fff" stroke="#3A4670" stroke-width=".8"/>
+            <!-- Stoßfänger und Räder -->
+            <path d="M11 44 L85 44" stroke="#3A4670" stroke-width="1.2"/>
+            <rect x="16" y="48" width="12" height="7" rx="2" fill="#1F2744"/>
+            <rect x="68" y="48" width="12" height="7" rx="2" fill="#1F2744"/>
+          </svg>
           Seiten- oder Heckscheibe
         </button>
         <button class="problem unsure" type="button" aria-pressed="false" data-label="eine andere Frage bzw. bin mir nicht sicher, was es ist">
