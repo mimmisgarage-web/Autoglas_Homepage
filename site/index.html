@@ -1,98 +1,366 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Glaswerk NRW – Autoglas-Service</title>
-  <meta name="description" content="Glaswerk NRW: Steinschlagreparatur, Scheibentausch und Kalibrierung von Fahrerassistenzsystemen. Direkte Abrechnung mit Ihrer Versicherung.">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glaswerk NRW – Autoglas-Reparatur und -Austausch vor Ort</title>
+<link rel="icon" href="assets/logo.png">
+<meta name="description" content="Glaswerk NRW – Autoglas-Reparatur und -Austausch mit Vor-Ort-Service in ganz NRW. Sitz in Köln.">
+
+<style>
+:root{
+  /* Markenfarben aus Visitenkarte/Logo (D023, Hypothese) */
+  --navy:#1F2744; --navy-2:#2B3558; --navy-3:#3A4670;
+  --silver-1:#F3F4F6; --silver-2:#E2E5EA; --silver-3:#C9CED6;
+  --ink:#1A2033; --muted:#4A5468; --on-navy:#D5DAE6;
+  --wa:#1B7F45; --wa-hover:#156838;
+  --surface:#fff; --border:#D5DAE1;
+  --radius:14px;
+  --font-head:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --head-weight:700; --head-spacing:.005em;
+  --font-body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --brushed:repeating-linear-gradient(180deg,rgba(255,255,255,.35) 0 1px,rgba(0,0,0,.035) 1px 3px),
+            linear-gradient(100deg,#E9ECF0 0%,#C9CED6 45%,#EEF0F3 70%,#CBD0D8 100%);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--silver-1);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);letter-spacing:var(--head-spacing);margin:0}
+:focus-visible{outline:3px solid #F2B84B;outline-offset:2px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.page{width:min(100%,440px);margin:0 auto;background:var(--silver-1);min-height:100vh;position:relative}
+
+/* Kopfzeile */
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:52px;height:auto;display:block}
+.brand-name{font-family:var(--font-head);font-weight:var(--head-weight);font-size:20px;line-height:1.05;color:var(--navy)}
+.brand-sub{display:block;font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.icon-btn{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;color:var(--navy);text-decoration:none;flex:none}
+.icon-btn svg{width:22px;height:22px}
+
+/* Metallstreifen wie auf der Karte */
+.strip{background:var(--brushed);color:var(--navy);text-align:center;padding:9px 16px;font-family:var(--font-head);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--silver-3)}
+
+/* Hero */
+.hero{background:var(--navy);color:#fff;padding:28px 20px 30px;position:relative;overflow:hidden;isolation:isolate}
+.hero > *:not(.glass){position:relative}
+/* Eigene Illustration: Frontscheibe mit Steinschlag (keine fremden Bildrechte) */
+.glass{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.glass .impact{transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:no-preference){
+  .glass .crack{stroke-dasharray:400;stroke-dashoffset:400;animation:crack 1.6s .3s ease-out forwards}
+  @keyframes crack{to{stroke-dashoffset:0}}
+}
+.hero h1{font-size:40px;line-height:1.04}
+.hero h1 span{display:block;color:var(--silver-3)}
+.hero .lead{color:var(--on-navy);margin:14px 0 22px;font-size:17px}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:12px 18px;border-radius:12px;font-weight:700;font-size:17px;text-decoration:none;text-align:center;border:0;cursor:pointer;font-family:var(--font-body)}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.btn-wa:hover{background:var(--wa-hover)}
+.btn-call{margin-top:10px;background:transparent;color:#fff;border:1.5px solid var(--navy-3);font-weight:600;font-size:16px;min-height:50px}
+.btn-call:hover{background:var(--navy-2)}
+.btn-call.light{color:var(--navy);border-color:var(--silver-3)}
+.btn-call.light:hover{background:var(--silver-2)}
+.hint{font-size:13px;color:var(--on-navy);margin:12px 0 0;text-align:center}
+
+/* Abschnitte */
+.section{padding:34px 20px}
+.section h2{font-size:28px;line-height:1.1;color:var(--navy);margin-bottom:6px}
+.section .intro{color:var(--muted);margin:0 0 18px}
+.alt{background:#fff}
+
+/* Problemwahl */
+.problems{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.problem{min-height:96px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:8px;text-align:left;border:2px solid var(--border);background:#fff;border-radius:var(--radius);padding:14px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+.problem svg{width:26px;height:26px;color:var(--navy-3)}
+.problem[aria-pressed="true"]{border-color:var(--navy);background:#E9ECF4;box-shadow:inset 0 0 0 1px var(--navy)}
+.problem.unsure{grid-column:1/-1;min-height:60px;flex-direction:row;align-items:center;justify-content:flex-start}
+.next{margin-top:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.next p{margin:0 0 12px;color:var(--muted);font-size:15px}
+.next strong{color:var(--ink)}
+
+/* Vertrauen */
+.trust{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.trust li{display:flex;gap:14px;align-items:flex-start;background:var(--silver-1);border-radius:12px;padding:14px}
+.trust .ico{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;flex:none}
+.trust .ico svg{width:20px;height:20px}
+.trust b{display:block}
+.trust span.t{color:var(--muted);font-size:14px}
+
+/* Ablauf */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 22px 50px;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:16px;top:38px;bottom:4px;width:2px;background:var(--silver-3)}
+.steps b{display:block;font-size:17px}
+.steps span{color:var(--muted);font-size:15px}
+
+/* Einsatzgebiet */
+.area{display:flex;gap:16px;align-items:center}
+.area svg{width:92px;height:auto;flex:none;color:var(--navy)}
+
+/* Abschluss-CTA */
+.cta{background:var(--navy);color:#fff;padding:36px 20px;position:relative;overflow:hidden;isolation:isolate}
+.cta > *:not(.glass){position:relative}
+.cta h2{font-size:28px;line-height:1.1;margin-bottom:8px}
+.cta p{color:var(--on-navy);margin:0 0 18px}
+
+/* Fuß */
+.footer{padding:28px 20px 96px;font-size:14px;color:var(--muted);background:#fff}
+.footer .f-brand{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.footer .f-brand img{width:64px}
+.footer strong{color:var(--ink);font-size:16px}
+.footer address{font-style:normal;line-height:1.7}
+.footer a{color:var(--navy)}
+.links{display:flex;gap:18px;margin-top:14px}
+
+/* Sticky-CTA (Variante D021) */
+.sticky{position:fixed;left:50%;transform:translate(-50%,120%);bottom:0;width:min(100%,440px);padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--border);display:flex;gap:10px;z-index:20;transition:transform .25s ease}
+.sticky.show{transform:translate(-50%,0)}
+.sticky .btn-wa{flex:1;min-height:50px}
+.sticky .icon-btn{width:50px;height:50px}
+
+
+
+@media (min-width:760px){
+  .page{border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 44px rgba(0,0,0,.06)}
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a class="logo" href="/">Glaswerk<span>NRW</span></a>
-      <nav>
-        <a href="#leistungen">Leistungen</a>
-        <a class="hide-mobile" href="#ablauf">Ablauf</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-    </div>
+
+
+
+<div class="page">
+
+  <header class="header">
+    <a class="brand" href="#top" aria-label="Glaswerk NRW – zur Startseite">
+      <img src="assets/logo.png" alt="" width="52" height="45">
+      <span class="brand-name">Glaswerk NRW<span class="brand-sub">Autoglas Service</span></span>
+    </a>
+    <a class="icon-btn" href="tel:+4916096292929" aria-label="Anrufen: 0160 96 292929">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    </a>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Klare Sicht. Schnell repariert.</h1>
-      <p>Ihr Autoglas-Fachbetrieb in NRW: Steinschlagreparatur, Scheibentausch und Kalibrierung, mit direkter Abrechnung über Ihre Versicherung.</p>
-      <a class="btn" href="#kontakt">Termin anfragen</a>
-      <a class="btn outline" href="#leistungen">Unsere Leistungen</a>
-    </div>
-  </section>
+  <main id="top">
+    <div class="strip">Vor-Ort-Service in ganz NRW</div>
 
-  <section id="leistungen">
-    <div class="container">
-      <h2>Leistungen</h2>
-      <p class="lead">Alles rund um die Scheiben Ihres Fahrzeugs.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>Steinschlagreparatur</h3>
-          <p>Kleine Schäden schnell beheben, bevor ein Riss entsteht. Bei Teilkasko oft ohne Selbstbeteiligung.</p>
-        </div>
-        <div class="card">
-          <h3>Scheibentausch</h3>
-          <p>Austausch von Front-, Heck- und Seitenscheiben in Erstausrüsterqualität für alle Marken.</p>
-        </div>
-        <div class="card">
-          <h3>Kalibrierung</h3>
-          <p>Kalibrierung von Kameras und Fahrerassistenzsystemen nach dem Scheibenwechsel.</p>
-        </div>
-        <div class="card">
-          <h3>Versicherungsabwicklung</h3>
-          <p>Wir übernehmen den Papierkram und rechnen direkt mit Ihrer Versicherung ab.</p>
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="h-hero">
+      <svg class="glass" viewBox="0 0 400 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="gGlass" x1="0" y1="0" x2="0.35" y2="1">
+            <stop offset="0" stop-color="#3A4670"/><stop offset=".55" stop-color="#2B3558"/><stop offset="1" stop-color="#232C4C"/>
+          </linearGradient>
+          <linearGradient id="gShine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".09"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="cWs"><path d="M-20 36 Q200 2 420 36 L470 520 Q200 556 -70 520 Z"/></clipPath>
+        </defs>
+        <!-- Frontscheibe -->
+        <path d="M-20 36 Q200 2 420 36 L470 520 Q200 556 -70 520 Z" fill="url(#gGlass)"/>
+        <g clip-path="url(#cWs)">
+          <!-- Lichtreflexe -->
+          <path d="M150 -10 L250 -10 L60 600 L-40 600 Z" fill="url(#gShine)"/>
+          <path d="M300 -10 L330 -10 L170 600 L140 600 Z" fill="url(#gShine)" opacity=".7"/>
+          <!-- Scheibenwischer -->
+          <path d="M20 540 L210 470" stroke="#161D35" stroke-width="5" stroke-linecap="round"/>
+          <path d="M210 548 L390 470" stroke="#161D35" stroke-width="5" stroke-linecap="round"/>
+          <!-- Steinschlag rechts oben -->
+          <g transform="translate(338 92)" fill="none" stroke="#fff" stroke-linecap="round">
+            <circle class="impact" r="4.5" fill="#fff" fill-opacity=".85" stroke="none"/>
+            <circle r="10" stroke-opacity=".35" stroke-width="1"/>
+            <g stroke-opacity=".55" stroke-width="1.1">
+              <path d="M0 0 L-26 -8 M0 0 L-8 -24 M0 0 L14 -20 M0 0 L26 4 M0 0 L10 24 M0 0 L-12 22 M0 0 L-30 10"/>
+            </g>
+            <!-- auslaufender Riss -->
+            <path class="crack" d="M-30 10 Q-60 30 -84 26 T-140 70 Q-170 96 -196 92 T-250 150" stroke-opacity=".32" stroke-width="1.3"/>
+          </g>
+          <!-- zweiter, kleiner Steinschlag -->
+          <g transform="translate(70 395)" fill="none" stroke="#fff" stroke-linecap="round" stroke-opacity=".3" stroke-width="1">
+            <circle r="3" fill="#fff" fill-opacity=".5" stroke="none"/>
+            <path d="M0 0 L-12 -4 M0 0 L-3 -12 M0 0 L9 -9 M0 0 L12 3 M0 0 L4 11 M0 0 L-8 9"/>
+          </g>
+        </g>
+      </svg>
+      <h1 id="h-hero">Glasschaden?<span>Wir kommen zu Ihnen.</span></h1>
+      <p class="lead">Autoglas-Reparatur und -Austausch – direkt vor Ort, in ganz NRW.</p>
+
+      <a class="btn btn-wa js-wa" href="https://wa.me/4916096292929" data-msg="Guten Tag, ich habe einen Schaden an meiner Autoscheibe.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+        Per WhatsApp schreiben
+      </a>
+      <a class="btn btn-call" href="tel:+4916096292929">Anrufen: 0160 / 96 292929</a>
+      <p class="hint">Tipp: Schicken Sie uns einfach ein Foto vom Schaden.</p>
+    </section>
+
+    <!-- 2. Problemwahl -->
+    <section class="section" aria-labelledby="h-problem">
+      <h2 id="h-problem">Was ist passiert?</h2>
+      <p class="intro">Tippen Sie an, was am ehesten passt.</p>
+      <div class="problems" role="group" aria-label="Schadensart wählen">
+        <button class="problem" type="button" aria-pressed="false" data-label="einen Steinschlag in der Scheibe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>
+          Steinschlag
+        </button>
+        <button class="problem" type="button" aria-pressed="false" data-label="einen Riss in der Scheibe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5l6 5-3 3 7 4-2 4M9 10l5-2 3 3 4-2"/></svg>
+          Riss in der Scheibe
+        </button>
+        <button class="problem" type="button" aria-pressed="false" data-label="eine stark beschädigte bzw. kaputte Scheibe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12l6-2 3 4 4-6 5 3M12 14l-1 6"/></svg>
+          Scheibe stark beschädigt oder kaputt
+        </button>
+        <button class="problem" type="button" aria-pressed="false" data-label="einen Schaden an einer Seiten- oder Heckscheibe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16l2-6a2 2 0 0 1 2-1.4h10A2 2 0 0 1 19 10l2 6v3H3z"/><path d="M6 10.5h5v3H5.2M13 10.5h5l.8 3H13z"/></svg>
+          Seiten- oder Heckscheibe
+        </button>
+        <button class="problem unsure" type="button" aria-pressed="false" data-label="eine andere Frage bzw. bin mir nicht sicher, was es ist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5h.01"/></svg>
+          Ich bin mir nicht sicher / etwas anderes
+        </button>
+      </div>
+
+      <div class="next" id="next" hidden>
+        <p id="nextText"></p>
+        <a class="btn btn-wa js-wa" id="nextWa" href="https://wa.me/4916096292929">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          Foto per WhatsApp senden
+        </a>
+        <a class="btn btn-call light" href="tel:+4916096292929">Lieber anrufen</a>
+      </div>
+    </section>
+
+    <!-- 3. Vertrauen -->
+    <section class="section alt" aria-labelledby="h-trust">
+      <h2 id="h-trust">Darauf können Sie sich verlassen</h2>
+      <ul class="trust">
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <div><b>Wir kommen zu Ihnen</b><span class="t">Vor-Ort-Service in ganz NRW – zu Hause oder am Arbeitsplatz.</span></div></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>
+          <div><b>Reparatur und Austausch</b><span class="t">Ob kleiner Steinschlag oder neue Scheibe – alles aus einer Hand.</span></div></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>
+          <div><b>Direkter Kontakt zum Betrieb</b><span class="t">Per WhatsApp oder Telefon – ohne Callcenter und Warteschleife.</span></div></li>
+        
+      </ul>
+    </section>
+
+    <!-- 4. Ablauf -->
+    <section class="section" aria-labelledby="h-steps">
+      <h2 id="h-steps">So einfach geht's</h2>
+      <p class="intro">In drei Schritten zur reparierten Scheibe.</p>
+      <ol class="steps">
+        <li><b>Schaden melden</b><span>Foto per WhatsApp schicken oder kurz anrufen.</span></li>
+        <li><b>Termin und Ort abstimmen</b><span>Wir melden uns bei Ihnen und vereinbaren, wann und wo wir kommen.</span></li>
+        <li><b>Reparatur oder Austausch</b><span>Wir erledigen die Arbeit direkt bei Ihnen vor Ort.</span></li>
+      </ol>
+    </section>
+
+    
+
+    <!-- 6. Einsatzgebiet -->
+    <section class="section" aria-labelledby="h-area">
+      <div class="area">
+        <!-- Vereinfachte, schematische NRW-Silhouette mit Standortpunkt Köln -->
+        <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M30 8l18 4 10-4 14 8 8 12 12 4-4 14 6 12-10 10-2 12-14 6-10-6-12 6-12-6-8 4-10-10 4-12-8-10 6-14-2-12 10-8z" fill="#E2E5EA" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="62" r="5" fill="currentColor"/><circle cx="30" cy="62" r="10" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"/></svg>
+        <div>
+          <h2 id="h-area" style="font-size:24px">Sitz in Köln – im Einsatz in ganz NRW</h2>
+          <p class="intro" style="margin:6px 0 0">Glaswerk NRW · Auf der Füllenweide 5 · 50769 Köln</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="ablauf" class="soft">
-    <div class="container">
-      <h2>So einfach geht's</h2>
-      <p class="lead">In drei Schritten zur neuen Scheibe.</p>
-      <div class="grid steps">
-        <div class="card">
-          <h3>Anfragen</h3>
-          <p>Rufen Sie uns an oder schreiben Sie uns, gern mit einem Foto vom Schaden.</p>
-        </div>
-        <div class="card">
-          <h3>Termin</h3>
-          <p>Wir vereinbaren einen passenden Termin und klären die Kosten mit Ihrer Versicherung.</p>
-        </div>
-        <div class="card">
-          <h3>Fertig</h3>
-          <p>Reparatur oder Tausch, Kalibrierung inklusive, und Sie fahren wieder mit klarer Sicht.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- 7. Abschluss-CTA -->
+    <section class="cta" aria-labelledby="h-cta">
+      <svg class="glass" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M0 0 H400 V320 H0 Z" fill="#1F2744"/>
+        <path d="M230 -10 L290 -10 L140 330 L80 330 Z" fill="#fff" fill-opacity=".04"/>
+        <g transform="translate(350 60)" fill="none" stroke="#fff" stroke-linecap="round" stroke-opacity=".35" stroke-width="1">
+          <circle r="4" fill="#fff" fill-opacity=".6" stroke="none"/>
+          <circle r="9" stroke-opacity=".25"/>
+          <path d="M0 0 L-22 -6 M0 0 L-6 -20 M0 0 L12 -16 M0 0 L20 4 M0 0 L8 20 M0 0 L-10 18 M0 0 L-24 8"/>
+          <path d="M-24 8 Q-50 26 -72 22 T-120 60" stroke-opacity=".22"/>
+        </g>
+      </svg>
+      <h2 id="h-cta">Schaden an der Scheibe?</h2>
+      <p>Schreiben Sie uns – wir kümmern uns darum.</p>
+      <a class="btn btn-wa js-wa" href="https://wa.me/4916096292929" data-msg="Guten Tag, ich habe einen Schaden an meiner Autoscheibe.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        Per WhatsApp schreiben
+      </a>
+      <a class="btn btn-call" href="tel:+4916096292929">Anrufen: 0160 / 96 292929</a>
+    </section>
+  </main>
 
-  <section id="kontakt" class="contact">
-    <div class="container">
-      <h2>Kontakt</h2>
-      <p class="lead">Wir freuen uns auf Ihre Anfrage.</p>
-      <!-- TODO: echte Kontaktdaten eintragen -->
-      <p><strong>Glaswerk NRW</strong></p>
-      <p>[Straße und Hausnummer]</p>
-      <p>[PLZ Ort]</p>
-      <p>Telefon: [Telefonnummer]</p>
-      <p>E-Mail: <a href="mailto:info@glaswerk-nrw.de">info@glaswerk-nrw.de</a></p>
-      <p>Öffnungszeiten: [Mo–Fr 8–18 Uhr]</p>
+  <footer class="footer">
+    <div class="f-brand">
+      <img src="assets/logo.png" alt="Logo Glaswerk NRW" width="64" height="55">
+      <div><strong>Glaswerk NRW</strong><br>Autoglas Service · Reparatur und Austausch</div>
     </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <span>© Glaswerk NRW</span>
-      <span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span>
-    </div>
+    <address>
+      Auf der Füllenweide 5<br>50769 Köln<br>
+      Telefon/WhatsApp: <a href="tel:+4916096292929">0160 / 96 292929</a><br>
+      E-Mail: <a href="mailto:glaswerk-nrw@t-online.de">glaswerk-nrw@t-online.de</a>
+    </address>
+    <div class="links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
   </footer>
+
+  
+
+  <!-- Fest stehende Kontaktleiste (Variante) -->
+  <div class="sticky" id="sticky" aria-hidden="true">
+    <a class="btn btn-wa js-wa" href="https://wa.me/4916096292929" data-msg="Guten Tag, ich habe einen Schaden an meiner Autoscheibe." tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+      WhatsApp
+    </a>
+    <a class="icon-btn" href="tel:+4916096292929" aria-label="Anrufen" tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var WA = 'https://wa.me/4916096292929';
+  function waLink(msg){ return WA + '?text=' + encodeURIComponent(msg); }
+
+  // Vorbelegte WhatsApp-Nachricht an allen WhatsApp-Buttons
+  document.querySelectorAll('.js-wa[data-msg]').forEach(function(a){ a.href = waLink(a.dataset.msg); });
+
+  // Problemwahl → passender nächster Schritt mit vorformulierter Nachricht
+  var problems = [].slice.call(document.querySelectorAll('.problem'));
+  var next = document.getElementById('next'), nextText = document.getElementById('nextText'), nextWa = document.getElementById('nextWa');
+  problems.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      problems.forEach(function(b){ b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      var label = btn.dataset.label;
+      nextText.innerHTML = '<strong>Gut, dass Sie sich melden.</strong> Schicken Sie uns am besten ein Foto vom Schaden per WhatsApp – dann können wir schnell einschätzen, was zu tun ist.';
+      nextWa.href = waLink('Guten Tag, ich habe ' + label + '. Ich schicke Ihnen gleich ein Foto.\nFahrzeug: \nOrt: ');
+      next.hidden = false;
+    });
+  });
+
+
+
+  // Kontaktleiste erst zeigen, wenn der Hero aus dem Bild ist
+  var sticky = document.getElementById('sticky'), hero = document.querySelector('.hero');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      var show = !entries[0].isIntersecting;
+      sticky.classList.toggle('show', show);
+      sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+      sticky.querySelectorAll('a').forEach(function(a){ a.tabIndex = show ? 0 : -1; });
+    }).observe(hero);
+  }
+})();
+</script>
 </body>
 </html>
